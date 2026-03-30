@@ -1,0 +1,4 @@
+﻿https://ya.ru/search?q=test#top
+http://localhost:5000/test?id=7
+https://google.com
+https://192.168.1.1/admin

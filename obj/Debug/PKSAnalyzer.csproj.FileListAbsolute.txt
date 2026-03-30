@@ -1,0 +1,5 @@
+C:\Users\Mosen\Desktop\PKS\obj\Debug\PKSAnalyzer.csprojResolveAssemblyReference.cache
+C:\Users\Mosen\Desktop\PKS\bin\Debug\PKSAnalyzer.exe
+C:\Users\Mosen\Desktop\PKS\bin\Debug\PKSAnalyzer.pdb
+C:\Users\Mosen\Desktop\PKS\obj\Debug\PKSAnalyzer.exe
+C:\Users\Mosen\Desktop\PKS\obj\Debug\PKSAnalyzer.pdb
