@@ -1,0 +1,25 @@
+﻿[14.04.2026 12:49:50] SERVER SYSTEM | Код: 200 | Успех
+Сервер запущен на порту 8080
+
+[14.04.2026 12:49:57] CLIENT GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Тело запроса:
+<нет тела>
+Ответ:
+{"averageProcessingMs":0,"getRequests":0,"messagesCount":0,"postRequests":0,"totalRequests":0,"uptime":"00:00:06"}
+Время выполнения: 53 мс
+
+[14.04.2026 12:49:57] SERVER GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Заголовки:
+Connection: Keep-Alive
+Host: localhost:8080
+Тело запроса:
+<пусто>
+Ответ:
+{"averageProcessingMs":0,"getRequests":0,"messagesCount":0,"postRequests":0,"totalRequests":0,"uptime":"00:00:06"}
+Время обработки: 33 мс
+
+[14.04.2026 12:50:01] SERVER SYSTEM | Код: 200 | Успех
+Сервер остановлен.
+

@@ -1,0 +1,5 @@
+C:\Users\Mosen\Desktop\PKS\pks3\obj\Debug\PKS3.csprojResolveAssemblyReference.cache
+C:\Users\Mosen\Desktop\PKS\pks3\bin\Debug\PKS3.exe
+C:\Users\Mosen\Desktop\PKS\pks3\bin\Debug\PKS3.pdb
+C:\Users\Mosen\Desktop\PKS\pks3\obj\Debug\PKS3.exe
+C:\Users\Mosen\Desktop\PKS\pks3\obj\Debug\PKS3.pdb
