@@ -74,6 +74,50 @@ public class ProductsController : Controller
     }
 
     [HttpPost]
+    public async Task<IActionResult> Update(int id, string name, string description, string specifications, string category, int minimalStock, int productionTimePerUnit)
+    {
+        var product = await context.Products.FindAsync(id);
+        if (product == null)
+        {
+            return NotFound();
+        }
+
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            TempData["Message"] = "Название продукта не заполнено.";
+            return RedirectToAction(nameof(Details), new { id });
+        }
+
+        if (productionTimePerUnit <= 0)
+        {
+            TempData["Message"] = "Время производства должно быть больше нуля.";
+            return RedirectToAction(nameof(Details), new { id });
+        }
+
+        product.Name = name;
+        product.Description = description ?? string.Empty;
+        product.Specifications = string.IsNullOrWhiteSpace(specifications) ? "{}" : specifications;
+        product.Category = category ?? string.Empty;
+        product.MinimalStock = Math.Max(0, minimalStock);
+        product.ProductionTimePerUnit = productionTimePerUnit;
+
+        var activeOrders = await context.WorkOrders
+            .Include(item => item.ProductionLine)
+            .Where(item => item.ProductId == id && item.Status != "Completed" && item.Status != "Cancelled" && item.Status != "Returned")
+            .ToListAsync();
+
+        foreach (var order in activeOrders)
+        {
+            var efficiency = order.ProductionLine?.EfficiencyFactor ?? 1;
+            order.EstimatedEndDate = ProductionHelper.CalculateEndDate(product, order.Quantity, efficiency, order.StartDate);
+        }
+
+        await context.SaveChangesAsync();
+        TempData["Message"] = "Продукт обновлен.";
+        return RedirectToAction(nameof(Details), new { id });
+    }
+
+    [HttpPost]
     public async Task<IActionResult> AddMaterial(int productId, int materialId, decimal quantityNeeded)
     {
         if (quantityNeeded <= 0)

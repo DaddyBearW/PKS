@@ -9,11 +9,35 @@
     <div class="col-lg-5">
         <div class="card border-0 shadow-sm">
             <div class="card-body">
-                <h1 class="h4">@Model.Product.Name</h1>
-                <p><strong>Категория:</strong> @Model.Product.Category</p>
-                <p><strong>Описание:</strong> @Model.Product.Description</p>
-                <p><strong>Характеристики:</strong> @Model.Product.Specifications</p>
-                <p><strong>Время на 1 шт.:</strong> @Model.Product.ProductionTimePerUnit мин</p>
+                <h1 class="h4 mb-3">Редактировать продукт</h1>
+                <form asp-action="Update" method="post">
+                    <input type="hidden" name="id" value="@Model.Product.Id" />
+                    <div class="mb-3">
+                        <label class="form-label">Название</label>
+                        <input name="name" value="@Model.Product.Name" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Описание</label>
+                        <textarea name="description" class="form-control">@Model.Product.Description</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Характеристики</label>
+                        <input name="specifications" value="@Model.Product.Specifications" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Категория</label>
+                        <input name="category" value="@Model.Product.Category" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Минимальный запас</label>
+                        <input name="minimalStock" type="number" min="0" value="@Model.Product.MinimalStock" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Время на 1 шт. (мин)</label>
+                        <input name="productionTimePerUnit" type="number" min="1" value="@Model.Product.ProductionTimePerUnit" class="form-control" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                </form>
             </div>
         </div>
     </div>

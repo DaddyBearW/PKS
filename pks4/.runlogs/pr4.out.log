@@ -200,3 +200,86 @@ info: Microsoft.EntityFrameworkCore.Database.Command[20101]
       SELECT c."Id", c."CoatOfArmsUrl", c."History", c."Name", c."PhotoUrl", c."Population", c."Region"
       FROM "Cities" AS c
       ORDER BY c."Name"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT t."Id", t."CoatOfArmsUrl", t."History", t."Name", t."PhotoUrl", t."Population", t."Region", a."Id", a."CityId", a."Description", a."History", a."Name", a."PhotoUrl", a."VisitPrice", a."WorkingHours"
+      FROM (
+          SELECT c."Id", c."CoatOfArmsUrl", c."History", c."Name", c."PhotoUrl", c."Population", c."Region"
+          FROM "Cities" AS c
+          WHERE c."Id" = @__id_0
+          LIMIT 1
+      ) AS t
+      LEFT JOIN "Attractions" AS a ON t."Id" = a."CityId"
+      ORDER BY t."Id"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT c."Id", c."CoatOfArmsUrl", c."History", c."Name", c."PhotoUrl", c."Population", c."Region"
+      FROM "Cities" AS c
+      ORDER BY c."Name"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT t."Id", t."CoatOfArmsUrl", t."History", t."Name", t."PhotoUrl", t."Population", t."Region", a."Id", a."CityId", a."Description", a."History", a."Name", a."PhotoUrl", a."VisitPrice", a."WorkingHours"
+      FROM (
+          SELECT c."Id", c."CoatOfArmsUrl", c."History", c."Name", c."PhotoUrl", c."Population", c."Region"
+          FROM "Cities" AS c
+          WHERE c."Id" = @__id_0
+          LIMIT 1
+      ) AS t
+      LEFT JOIN "Attractions" AS a ON t."Id" = a."CityId"
+      ORDER BY t."Id"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT t."Id", t."CoatOfArmsUrl", t."History", t."Name", t."PhotoUrl", t."Population", t."Region", a."Id", a."CityId", a."Description", a."History", a."Name", a."PhotoUrl", a."VisitPrice", a."WorkingHours"
+      FROM (
+          SELECT c."Id", c."CoatOfArmsUrl", c."History", c."Name", c."PhotoUrl", c."Population", c."Region"
+          FROM "Cities" AS c
+          WHERE c."Id" = @__id_0
+          LIMIT 1
+      ) AS t
+      LEFT JOIN "Attractions" AS a ON t."Id" = a."CityId"
+      ORDER BY t."Id"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT a."Id", a."CityId", a."Description", a."History", a."Name", a."PhotoUrl", a."VisitPrice", a."WorkingHours", c."Id", c."CoatOfArmsUrl", c."History", c."Name", c."PhotoUrl", c."Population", c."Region"
+      FROM "Attractions" AS a
+      INNER JOIN "Cities" AS c ON a."CityId" = c."Id"
+      WHERE a."Id" = @__id_0
+      LIMIT 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT t."Id", t."CoatOfArmsUrl", t."History", t."Name", t."PhotoUrl", t."Population", t."Region", a."Id", a."CityId", a."Description", a."History", a."Name", a."PhotoUrl", a."VisitPrice", a."WorkingHours"
+      FROM (
+          SELECT c."Id", c."CoatOfArmsUrl", c."History", c."Name", c."PhotoUrl", c."Population", c."Region"
+          FROM "Cities" AS c
+          WHERE c."Id" = @__id_0
+          LIMIT 1
+      ) AS t
+      LEFT JOIN "Attractions" AS a ON t."Id" = a."CityId"
+      ORDER BY t."Id"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT c."Id", c."CoatOfArmsUrl", c."History", c."Name", c."PhotoUrl", c."Population", c."Region"
+      FROM "Cities" AS c
+      ORDER BY c."Name"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT t."Id", t."CoatOfArmsUrl", t."History", t."Name", t."PhotoUrl", t."Population", t."Region", a."Id", a."CityId", a."Description", a."History", a."Name", a."PhotoUrl", a."VisitPrice", a."WorkingHours"
+      FROM (
+          SELECT c."Id", c."CoatOfArmsUrl", c."History", c."Name", c."PhotoUrl", c."Population", c."Region"
+          FROM "Cities" AS c
+          WHERE c."Id" = @__id_0
+          LIMIT 1
+      ) AS t
+      LEFT JOIN "Attractions" AS a ON t."Id" = a."CityId"
+      ORDER BY t."Id"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT c."Id", c."CoatOfArmsUrl", c."History", c."Name", c."PhotoUrl", c."Population", c."Region"
+      FROM "Cities" AS c
+      ORDER BY c."Name"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (5ms) [Parameters=[@__ToLower_0_contains='?'], CommandType='Text', CommandTimeout='30']
+      SELECT c."Id", c."CoatOfArmsUrl", c."History", c."Name", c."PhotoUrl", c."Population", c."Region"
+      FROM "Cities" AS c
+      WHERE lower(c."Name") LIKE @__ToLower_0_contains
+      ORDER BY c."Name"

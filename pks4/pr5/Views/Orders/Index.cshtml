@@ -53,6 +53,7 @@
                     <option value="Pending">Pending</option>
                     <option value="InProgress">InProgress</option>
                     <option value="Completed">Completed</option>
+                    <option value="Returned">Returned</option>
                     <option value="Cancelled">Cancelled</option>
                 </select>
                 <button type="submit" class="btn btn-outline-primary">Фильтр</button>
@@ -69,7 +70,7 @@
                             <th>Кол-во</th>
                             <th>Статус</th>
                             <th style="min-width: 160px;">Прогресс</th>
-                            <th>Срок</th>
+                            <th>Время</th>
                             <th>Действия</th>
                         </tr>
                     </thead>
@@ -81,6 +82,7 @@
                             "Pending" => "status-badge status-pending",
                             "InProgress" => "status-badge status-progress",
                             "Completed" => "status-badge status-completed",
+                            "Returned" => "status-badge status-returned",
                             "Cancelled" => "status-badge status-cancelled",
                             _ => "status-badge"
                         };
@@ -103,7 +105,10 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>@item.EstimatedEndDate.ToString("dd.MM HH:mm")</td>
+                            <td>
+                                <div>@item.StartDate.ToString("dd.MM HH:mm")</div>
+                                <div class="text-muted small">до @item.EstimatedEndDate.ToString("dd.MM HH:mm")</div>
+                            </td>
                             <td>
                                 <div class="d-flex flex-wrap gap-2">
                                     @if (item.Status == "Pending")
@@ -114,7 +119,7 @@
                                         </form>
                                     }
 
-                                    @if (item.Status != "Completed" && item.Status != "Cancelled")
+                                    @if (item.Status != "Completed" && item.Status != "Cancelled" && item.Status != "Returned")
                                     {
                                         <form asp-action="UpdateProgress" method="post" class="d-flex gap-2">
                                             <input type="hidden" name="id" value="@item.Id" />
@@ -130,6 +135,13 @@
                                         <form asp-action="Cancel" method="post">
                                             <input type="hidden" name="id" value="@item.Id" />
                                             <button type="submit" class="btn btn-sm btn-outline-danger">Отменить</button>
+                                        </form>
+                                    }
+                                    @if (item.Status != "Returned")
+                                    {
+                                        <form asp-action="ReturnOrder" method="post">
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button type="submit" class="btn btn-sm btn-warning">Возврат</button>
                                         </form>
                                     }
                                     else

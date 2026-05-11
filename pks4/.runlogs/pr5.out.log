@@ -19,7 +19,7 @@ WHERE
                 deptype IN ('e', 'x')
         )
 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
       SELECT EXISTS (
           SELECT 1
           FROM "Products" AS p)
@@ -34,15 +34,15 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: C:\Users\Mosen\Desktop\PKS\pks4\pr5
 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
       SELECT p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications"
       FROM "Products" AS p
       ORDER BY p."Name"
 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
       SELECT p."Id", p."CurrentWorkOrderId", p."EfficiencyFactor", p."Name", p."Status"
       FROM "ProductionLines" AS p
-      WHERE p."CurrentWorkOrderId" IS NULL
+      WHERE p."Status" = 'Active' OR p."CurrentWorkOrderId" IS NULL
       ORDER BY p."Name"
 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
       Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
@@ -50,45 +50,267 @@ info: Microsoft.EntityFrameworkCore.Database.Command[20101]
       FROM "WorkOrders" AS w
       INNER JOIN "Products" AS p ON w."ProductId" = p."Id"
       LEFT JOIN "ProductionLines" AS p0 ON w."ProductionLineId" = p0."Id"
-      ORDER BY w."Id" DESC
 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."CurrentWorkOrderId", p."EfficiencyFactor", p."Name", p."Status", t."Id", t."EstimatedEndDate", t."ProductId", t."ProductionLineId", t."ProgressPercent", t."Quantity", t."StartDate", t."Status", t."Id0", t."Category", t."Description", t."MinimalStock", t."Name", t."ProductionTimePerUnit", t."Specifications"
+      FROM "ProductionLines" AS p
+      LEFT JOIN (
+          SELECT w."Id", w."EstimatedEndDate", w."ProductId", w."ProductionLineId", w."ProgressPercent", w."Quantity", w."StartDate", w."Status", p0."Id" AS "Id0", p0."Category", p0."Description", p0."MinimalStock", p0."Name", p0."ProductionTimePerUnit", p0."Specifications"
+          FROM "WorkOrders" AS w
+          INNER JOIN "Products" AS p0 ON w."ProductId" = p0."Id"
+      ) AS t ON p."Id" = t."ProductionLineId"
+      ORDER BY p."Name", p."Id", t."Id"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT t."Category"
+      FROM (
+          SELECT DISTINCT p."Category"
+          FROM "Products" AS p
+      ) AS t
+      ORDER BY t."Category"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications", t."ProductId", t."MaterialId", t."QuantityNeeded", t."Id", t."MinimalStock", t."Name", t."Quantity", t."UnitOfMeasure"
+      FROM "Products" AS p
+      LEFT JOIN (
+          SELECT p0."ProductId", p0."MaterialId", p0."QuantityNeeded", m."Id", m."MinimalStock", m."Name", m."Quantity", m."UnitOfMeasure"
+          FROM "ProductMaterials" AS p0
+          INNER JOIN "Materials" AS m ON p0."MaterialId" = m."Id"
+      ) AS t ON p."Id" = t."ProductId"
+      ORDER BY p."Name", p."Id", t."ProductId", t."MaterialId"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT m."Id", m."MinimalStock", m."Name", m."Quantity", m."UnitOfMeasure"
+      FROM "Materials" AS m
+      ORDER BY m."Name"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT m."Id", m."MinimalStock", m."Name", m."Quantity", m."UnitOfMeasure"
+      FROM "Materials" AS m
+      ORDER BY m."Name"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT m."Id", m."MinimalStock", m."Name", m."Quantity", m."UnitOfMeasure"
+      FROM "Materials" AS m
+      ORDER BY m."Name"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT m."Id", m."MinimalStock", m."Name", m."Quantity", m."UnitOfMeasure"
+      FROM "Materials" AS m
+      ORDER BY m."Name"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT m."Id", m."MinimalStock", m."Name", m."Quantity", m."UnitOfMeasure"
+      FROM "Materials" AS m
+      ORDER BY m."Name"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT t."Category"
+      FROM (
+          SELECT DISTINCT p."Category"
+          FROM "Products" AS p
+      ) AS t
+      ORDER BY t."Category"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications", t."ProductId", t."MaterialId", t."QuantityNeeded", t."Id", t."MinimalStock", t."Name", t."Quantity", t."UnitOfMeasure"
+      FROM "Products" AS p
+      LEFT JOIN (
+          SELECT p0."ProductId", p0."MaterialId", p0."QuantityNeeded", m."Id", m."MinimalStock", m."Name", m."Quantity", m."UnitOfMeasure"
+          FROM "ProductMaterials" AS p0
+          INNER JOIN "Materials" AS m ON p0."MaterialId" = m."Id"
+      ) AS t ON p."Id" = t."ProductId"
+      ORDER BY p."Name", p."Id", t."ProductId", t."MaterialId"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
       SELECT p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications"
       FROM "Products" AS p
       ORDER BY p."Name"
 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
       SELECT p."Id", p."CurrentWorkOrderId", p."EfficiencyFactor", p."Name", p."Status"
       FROM "ProductionLines" AS p
-      WHERE p."CurrentWorkOrderId" IS NULL
+      WHERE p."Status" = 'Active' OR p."CurrentWorkOrderId" IS NULL
       ORDER BY p."Name"
 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
       SELECT w."Id", w."EstimatedEndDate", w."ProductId", w."ProductionLineId", w."ProgressPercent", w."Quantity", w."StartDate", w."Status", p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications", p0."Id", p0."CurrentWorkOrderId", p0."EfficiencyFactor", p0."Name", p0."Status"
       FROM "WorkOrders" AS w
       INNER JOIN "Products" AS p ON w."ProductId" = p."Id"
       LEFT JOIN "ProductionLines" AS p0 ON w."ProductionLineId" = p0."Id"
-      ORDER BY w."Id" DESC
 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      Executed DbCommand (18ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
       SELECT w."Id", w."EstimatedEndDate", w."ProductId", w."ProductionLineId", w."ProgressPercent", w."Quantity", w."StartDate", w."Status"
       FROM "WorkOrders" AS w
       WHERE w."Id" = @__p_0
       LIMIT 1
 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      Executed DbCommand (3ms) [Parameters=[@__order_ProductId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT p."ProductId", p."MaterialId", p."QuantityNeeded", m."Id", m."MinimalStock", m."Name", m."Quantity", m."UnitOfMeasure"
+      FROM "ProductMaterials" AS p
+      INNER JOIN "Materials" AS m ON p."MaterialId" = m."Id"
+      WHERE p."ProductId" = @__order_ProductId_0
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (11ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = Decimal), @p3='?' (DbType = Int32), @p2='?' (DbType = Decimal), @p6='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?'], CommandType='Text', CommandTimeout='30']
+      UPDATE "Materials" SET "Quantity" = @p0
+      WHERE "Id" = @p1;
+      UPDATE "Materials" SET "Quantity" = @p2
+      WHERE "Id" = @p3;
+      UPDATE "WorkOrders" SET "ProgressPercent" = @p4, "Status" = @p5
+      WHERE "Id" = @p6;
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications"
+      FROM "Products" AS p
+      ORDER BY p."Name"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."CurrentWorkOrderId", p."EfficiencyFactor", p."Name", p."Status"
+      FROM "ProductionLines" AS p
+      WHERE p."Status" = 'Active' OR p."CurrentWorkOrderId" IS NULL
+      ORDER BY p."Name"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT w."Id", w."EstimatedEndDate", w."ProductId", w."ProductionLineId", w."ProgressPercent", w."Quantity", w."StartDate", w."Status", p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications", p0."Id", p0."CurrentWorkOrderId", p0."EfficiencyFactor", p0."Name", p0."Status"
+      FROM "WorkOrders" AS w
+      INNER JOIN "Products" AS p ON w."ProductId" = p."Id"
+      LEFT JOIN "ProductionLines" AS p0 ON w."ProductionLineId" = p0."Id"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT m."Id", m."MinimalStock", m."Name", m."Quantity", m."UnitOfMeasure"
+      FROM "Materials" AS m
+      ORDER BY m."Name"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT t."Category"
+      FROM (
+          SELECT DISTINCT p."Category"
+          FROM "Products" AS p
+      ) AS t
+      ORDER BY t."Category"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications", t."ProductId", t."MaterialId", t."QuantityNeeded", t."Id", t."MinimalStock", t."Name", t."Quantity", t."UnitOfMeasure"
+      FROM "Products" AS p
+      LEFT JOIN (
+          SELECT p0."ProductId", p0."MaterialId", p0."QuantityNeeded", m."Id", m."MinimalStock", m."Name", m."Quantity", m."UnitOfMeasure"
+          FROM "ProductMaterials" AS p0
+          INNER JOIN "Materials" AS m ON p0."MaterialId" = m."Id"
+      ) AS t ON p."Id" = t."ProductId"
+      ORDER BY p."Name", p."Id", t."ProductId", t."MaterialId"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT t."Id", t."Category", t."Description", t."MinimalStock", t."Name", t."ProductionTimePerUnit", t."Specifications", t0."ProductId", t0."MaterialId", t0."QuantityNeeded", t0."Id", t0."MinimalStock", t0."Name", t0."Quantity", t0."UnitOfMeasure"
+      FROM (
+          SELECT p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications"
+          FROM "Products" AS p
+          WHERE p."Id" = @__id_0
+          LIMIT 1
+      ) AS t
+      LEFT JOIN (
+          SELECT p0."ProductId", p0."MaterialId", p0."QuantityNeeded", m."Id", m."MinimalStock", m."Name", m."Quantity", m."UnitOfMeasure"
+          FROM "ProductMaterials" AS p0
+          INNER JOIN "Materials" AS m ON p0."MaterialId" = m."Id"
+      ) AS t0 ON t."Id" = t0."ProductId"
+      ORDER BY t."Id", t0."ProductId", t0."MaterialId"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT m."Id", m."MinimalStock", m."Name", m."Quantity", m."UnitOfMeasure"
+      FROM "Materials" AS m
+      ORDER BY m."Name"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications"
+      FROM "Products" AS p
+      ORDER BY p."Name"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."CurrentWorkOrderId", p."EfficiencyFactor", p."Name", p."Status"
+      FROM "ProductionLines" AS p
+      WHERE p."Status" = 'Active' OR p."CurrentWorkOrderId" IS NULL
+      ORDER BY p."Name"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT w."Id", w."EstimatedEndDate", w."ProductId", w."ProductionLineId", w."ProgressPercent", w."Quantity", w."StartDate", w."Status", p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications", p0."Id", p0."CurrentWorkOrderId", p0."EfficiencyFactor", p0."Name", p0."Status"
+      FROM "WorkOrders" AS w
+      INNER JOIN "Products" AS p ON w."ProductId" = p."Id"
+      LEFT JOIN "ProductionLines" AS p0 ON w."ProductionLineId" = p0."Id"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."CurrentWorkOrderId", p."EfficiencyFactor", p."Name", p."Status", t."Id", t."EstimatedEndDate", t."ProductId", t."ProductionLineId", t."ProgressPercent", t."Quantity", t."StartDate", t."Status", t."Id0", t."Category", t."Description", t."MinimalStock", t."Name", t."ProductionTimePerUnit", t."Specifications"
+      FROM "ProductionLines" AS p
+      LEFT JOIN (
+          SELECT w."Id", w."EstimatedEndDate", w."ProductId", w."ProductionLineId", w."ProgressPercent", w."Quantity", w."StartDate", w."Status", p0."Id" AS "Id0", p0."Category", p0."Description", p0."MinimalStock", p0."Name", p0."ProductionTimePerUnit", p0."Specifications"
+          FROM "WorkOrders" AS w
+          INNER JOIN "Products" AS p0 ON w."ProductId" = p0."Id"
+      ) AS t ON p."Id" = t."ProductionLineId"
+      ORDER BY p."Name", p."Id", t."Id"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT t."Category"
+      FROM (
+          SELECT DISTINCT p."Category"
+          FROM "Products" AS p
+      ) AS t
+      ORDER BY t."Category"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications", t."ProductId", t."MaterialId", t."QuantityNeeded", t."Id", t."MinimalStock", t."Name", t."Quantity", t."UnitOfMeasure"
+      FROM "Products" AS p
+      LEFT JOIN (
+          SELECT p0."ProductId", p0."MaterialId", p0."QuantityNeeded", m."Id", m."MinimalStock", m."Name", m."Quantity", m."UnitOfMeasure"
+          FROM "ProductMaterials" AS p0
+          INNER JOIN "Materials" AS m ON p0."MaterialId" = m."Id"
+      ) AS t ON p."Id" = t."ProductId"
+      ORDER BY p."Name", p."Id", t."ProductId", t."MaterialId"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT m."Id", m."MinimalStock", m."Name", m."Quantity", m."UnitOfMeasure"
+      FROM "Materials" AS m
+      ORDER BY m."Name"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications"
+      FROM "Products" AS p
+      ORDER BY p."Name"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."CurrentWorkOrderId", p."EfficiencyFactor", p."Name", p."Status"
+      FROM "ProductionLines" AS p
+      WHERE p."Status" = 'Active' OR p."CurrentWorkOrderId" IS NULL
+      ORDER BY p."Name"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT w."Id", w."EstimatedEndDate", w."ProductId", w."ProductionLineId", w."ProgressPercent", w."Quantity", w."StartDate", w."Status", p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications", p0."Id", p0."CurrentWorkOrderId", p0."EfficiencyFactor", p0."Name", p0."Status"
+      FROM "WorkOrders" AS w
+      INNER JOIN "Products" AS p ON w."ProductId" = p."Id"
+      LEFT JOIN "ProductionLines" AS p0 ON w."ProductionLineId" = p0."Id"
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications"
+      FROM "Products" AS p
+      WHERE p."Id" = @__p_0
+      LIMIT 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[@__productId_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT p."ProductId", p."MaterialId", p."QuantityNeeded", m."Id", m."MinimalStock", m."Name", m."Quantity", m."UnitOfMeasure"
+      FROM "ProductMaterials" AS p
+      INNER JOIN "Materials" AS m ON p."MaterialId" = m."Id"
+      WHERE p."ProductId" = @__productId_0
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
       SELECT p."Id", p."CurrentWorkOrderId", p."EfficiencyFactor", p."Name", p."Status"
       FROM "ProductionLines" AS p
       WHERE p."Id" = @__p_0
       LIMIT 1
 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (2ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = Int32), @p4='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?'], CommandType='Text', CommandTimeout='30']
-      UPDATE "ProductionLines" SET "CurrentWorkOrderId" = @p0
-      WHERE "Id" = @p1;
-      UPDATE "WorkOrders" SET "ProgressPercent" = @p2, "Status" = @p3
-      WHERE "Id" = @p4;
+      Executed DbCommand (6ms) [Parameters=[@__lineId_0='?' (DbType = Int32), @__endDate_1='?' (DbType = DateTime2), @__startDate_2='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+      SELECT EXISTS (
+          SELECT 1
+          FROM "WorkOrders" AS w
+          WHERE w."ProductionLineId" = @__lineId_0 AND w."Status" <> 'Completed' AND w."Status" <> 'Cancelled' AND w."Status" <> 'Returned' AND w."StartDate" < @__endDate_1 AND @__startDate_2 < w."EstimatedEndDate")
 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
       SELECT p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications"
       FROM "Products" AS p
       ORDER BY p."Name"
@@ -96,7 +318,7 @@ info: Microsoft.EntityFrameworkCore.Database.Command[20101]
       Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
       SELECT p."Id", p."CurrentWorkOrderId", p."EfficiencyFactor", p."Name", p."Status"
       FROM "ProductionLines" AS p
-      WHERE p."CurrentWorkOrderId" IS NULL
+      WHERE p."Status" = 'Active' OR p."CurrentWorkOrderId" IS NULL
       ORDER BY p."Name"
 info: Microsoft.EntityFrameworkCore.Database.Command[20101]
       Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
@@ -104,88 +326,3 @@ info: Microsoft.EntityFrameworkCore.Database.Command[20101]
       FROM "WorkOrders" AS w
       INNER JOIN "Products" AS p ON w."ProductId" = p."Id"
       LEFT JOIN "ProductionLines" AS p0 ON w."ProductionLineId" = p0."Id"
-      ORDER BY w."Id" DESC
-info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-      SELECT w."Id", w."EstimatedEndDate", w."ProductId", w."ProductionLineId", w."ProgressPercent", w."Quantity", w."StartDate", w."Status"
-      FROM "WorkOrders" AS w
-      WHERE w."Id" = @__p_0
-      LIMIT 1
-info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (3ms) [Parameters=[@p2='?' (DbType = Int32), @p0='?' (DbType = Int32), @p1='?'], CommandType='Text', CommandTimeout='30']
-      UPDATE "WorkOrders" SET "ProgressPercent" = @p0, "Status" = @p1
-      WHERE "Id" = @p2;
-info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-      SELECT p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications"
-      FROM "Products" AS p
-      ORDER BY p."Name"
-info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-      SELECT p."Id", p."CurrentWorkOrderId", p."EfficiencyFactor", p."Name", p."Status"
-      FROM "ProductionLines" AS p
-      WHERE p."CurrentWorkOrderId" IS NULL
-      ORDER BY p."Name"
-info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-      SELECT w."Id", w."EstimatedEndDate", w."ProductId", w."ProductionLineId", w."ProgressPercent", w."Quantity", w."StartDate", w."Status", p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications", p0."Id", p0."CurrentWorkOrderId", p0."EfficiencyFactor", p0."Name", p0."Status"
-      FROM "WorkOrders" AS w
-      INNER JOIN "Products" AS p ON w."ProductId" = p."Id"
-      LEFT JOIN "ProductionLines" AS p0 ON w."ProductionLineId" = p0."Id"
-      ORDER BY w."Id" DESC
-info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-      SELECT w."Id", w."EstimatedEndDate", w."ProductId", w."ProductionLineId", w."ProgressPercent", w."Quantity", w."StartDate", w."Status"
-      FROM "WorkOrders" AS w
-      WHERE w."Id" = @__p_0
-      LIMIT 1
-info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (3ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-      UPDATE "WorkOrders" SET "ProgressPercent" = @p0
-      WHERE "Id" = @p1;
-info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-      SELECT p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications"
-      FROM "Products" AS p
-      ORDER BY p."Name"
-info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-      SELECT p."Id", p."CurrentWorkOrderId", p."EfficiencyFactor", p."Name", p."Status"
-      FROM "ProductionLines" AS p
-      WHERE p."CurrentWorkOrderId" IS NULL
-      ORDER BY p."Name"
-info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-      SELECT w."Id", w."EstimatedEndDate", w."ProductId", w."ProductionLineId", w."ProgressPercent", w."Quantity", w."StartDate", w."Status", p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications", p0."Id", p0."CurrentWorkOrderId", p0."EfficiencyFactor", p0."Name", p0."Status"
-      FROM "WorkOrders" AS w
-      INNER JOIN "Products" AS p ON w."ProductId" = p."Id"
-      LEFT JOIN "ProductionLines" AS p0 ON w."ProductionLineId" = p0."Id"
-      ORDER BY w."Id" DESC
-info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-      SELECT w."Id", w."EstimatedEndDate", w."ProductId", w."ProductionLineId", w."ProgressPercent", w."Quantity", w."StartDate", w."Status"
-      FROM "WorkOrders" AS w
-      WHERE w."Id" = @__p_0
-      LIMIT 1
-info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (5ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-      UPDATE "WorkOrders" SET "ProgressPercent" = @p0
-      WHERE "Id" = @p1;
-info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-      SELECT p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications"
-      FROM "Products" AS p
-      ORDER BY p."Name"
-info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-      SELECT p."Id", p."CurrentWorkOrderId", p."EfficiencyFactor", p."Name", p."Status"
-      FROM "ProductionLines" AS p
-      WHERE p."CurrentWorkOrderId" IS NULL
-      ORDER BY p."Name"
-info: Microsoft.EntityFrameworkCore.Database.Command[20101]
-      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-      SELECT w."Id", w."EstimatedEndDate", w."ProductId", w."ProductionLineId", w."ProgressPercent", w."Quantity", w."StartDate", w."Status", p."Id", p."Category", p."Description", p."MinimalStock", p."Name", p."ProductionTimePerUnit", p."Specifications", p0."Id", p0."CurrentWorkOrderId", p0."EfficiencyFactor", p0."Name", p0."Status"
-      FROM "WorkOrders" AS w
-      INNER JOIN "Products" AS p ON w."ProductId" = p."Id"
-      LEFT JOIN "ProductionLines" AS p0 ON w."ProductionLineId" = p0."Id"
-      ORDER BY w."Id" DESC

@@ -29,11 +29,26 @@ public class OrdersController : Controller
         ViewBag.Status = status;
         ViewBag.Products = await context.Products.OrderBy(item => item.Name).ToListAsync();
         ViewBag.Lines = await context.ProductionLines
-            .Where(item => item.CurrentWorkOrderId == null)
+            .Where(item => item.Status == "Active" || item.CurrentWorkOrderId == null)
             .OrderBy(item => item.Name)
             .ToListAsync();
 
-        return View(await orders.OrderByDescending(item => item.Id).ToListAsync());
+        var statusPriority = new Dictionary<string, int>
+        {
+            ["InProgress"] = 0,
+            ["Pending"] = 1,
+            ["Completed"] = 2,
+            ["Returned"] = 3,
+            ["Cancelled"] = 4
+        };
+
+        var orderedOrders = await orders.ToListAsync();
+        return View(orderedOrders
+            .OrderBy(item => statusPriority.TryGetValue(item.Status, out var priority) ? priority : 9)
+            .ThenBy(item => item.StartDate)
+            .ThenBy(item => item.EstimatedEndDate)
+            .ThenBy(item => item.Id)
+            .ToList());
     }
 
     [HttpPost]
@@ -68,9 +83,16 @@ public class OrdersController : Controller
             }
         }
 
-        await ProductionHelper.ReserveMaterialsAsync(context, productId, quantity);
-
         var normalizedStartDate = DateTime.SpecifyKind(startDate, DateTimeKind.Unspecified);
+        var estimatedEndDate = ProductionHelper.CalculateEndDate(product, quantity, efficiency, normalizedStartDate);
+
+        if (lineId.HasValue && await ProductionHelper.HasLineScheduleConflictAsync(context, lineId.Value, normalizedStartDate, estimatedEndDate))
+        {
+            TempData["Message"] = "На выбранной линии уже есть заказ на это время. Выберите другое время или другую линию.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        await ProductionHelper.ReserveMaterialsAsync(context, productId, quantity);
 
         var order = new WorkOrder
         {
@@ -78,7 +100,7 @@ public class OrdersController : Controller
             ProductionLineId = lineId,
             Quantity = quantity,
             StartDate = normalizedStartDate,
-            EstimatedEndDate = ProductionHelper.CalculateEndDate(product, quantity, efficiency, normalizedStartDate),
+            EstimatedEndDate = estimatedEndDate,
             Status = "Pending",
             ProgressPercent = 0
         };
@@ -104,6 +126,12 @@ public class OrdersController : Controller
             var line = await context.ProductionLines.FindAsync(order.ProductionLineId.Value);
             if (line != null)
             {
+                if (line.CurrentWorkOrderId.HasValue && line.CurrentWorkOrderId.Value != order.Id)
+                {
+                    TempData["Message"] = "Эта линия уже занята другим заказом.";
+                    return RedirectToAction(nameof(Index));
+                }
+
                 line.Status = "Active";
                 line.CurrentWorkOrderId = order.Id;
             }
@@ -135,6 +163,39 @@ public class OrdersController : Controller
 
         await context.SaveChangesAsync();
         TempData["Message"] = "Заказ отменен.";
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ReturnOrder(int id)
+    {
+        var order = await context.WorkOrders.FindAsync(id);
+        if (order == null)
+        {
+            return NotFound();
+        }
+
+        if (order.Status == "Returned")
+        {
+            TempData["Message"] = "Возврат по этому заказу уже выполнен.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        await ProductionHelper.ReturnMaterialsAsync(context, order);
+        order.Status = "Returned";
+        order.ProgressPercent = 0;
+
+        if (order.ProductionLineId.HasValue)
+        {
+            var line = await context.ProductionLines.FindAsync(order.ProductionLineId.Value);
+            if (line != null && line.CurrentWorkOrderId == order.Id)
+            {
+                line.CurrentWorkOrderId = null;
+            }
+        }
+
+        await context.SaveChangesAsync();
+        TempData["Message"] = "Возврат материалов выполнен по коэффициентам: сталь 0.15, крепеж 0.75, пластик 0.60.";
         return RedirectToAction(nameof(Index));
     }
 
