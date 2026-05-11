@@ -1,0 +1,148 @@
+@model List<WorkOrder>
+@{
+    ViewData["Title"] = "Заказы";
+    var products = ViewBag.Products as List<Product> ?? new List<Product>();
+    var lines = ViewBag.Lines as List<ProductionLine> ?? new List<ProductionLine>();
+}
+
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h1 class="h5 mb-3">Создать заказ</h1>
+                <form asp-action="Create" method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Продукт</label>
+                        <select name="productId" class="form-select">
+                            @foreach (var item in products)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Количество</label>
+                        <input name="quantity" type="number" value="1" min="1" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Линия</label>
+                        <select name="lineId" class="form-select">
+                            <option value="">Без линии</option>
+                            @foreach (var item in lines)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Дата старта</label>
+                        <input name="startDate" type="datetime-local" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" class="form-control" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Создать</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h5 mb-0">Таблица заказов</h2>
+            <form method="get" class="d-flex gap-2">
+                <select name="status" class="form-select">
+                    <option value="">Все</option>
+                    <option value="Pending">Pending</option>
+                    <option value="InProgress">InProgress</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+                <button type="submit" class="btn btn-outline-primary">Фильтр</button>
+            </form>
+        </div>
+
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th>№</th>
+                            <th>Продукт</th>
+                            <th>Кол-во</th>
+                            <th>Статус</th>
+                            <th style="min-width: 160px;">Прогресс</th>
+                            <th>Срок</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model)
+                    {
+                        var statusClass = item.Status switch
+                        {
+                            "Pending" => "status-badge status-pending",
+                            "InProgress" => "status-badge status-progress",
+                            "Completed" => "status-badge status-completed",
+                            "Cancelled" => "status-badge status-cancelled",
+                            _ => "status-badge"
+                        };
+                        var progressMinWidth = item.ProgressPercent == 0 ? "42px" : "0";
+
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Product?.Name</td>
+                            <td>@item.Quantity</td>
+                            <td><span class="@statusClass">@item.Status</span></td>
+                            <td>
+                                <div class="progress" style="height: 22px;">
+                                    <div class="progress-bar @(item.ProgressPercent == 100 ? "bg-success" : "bg-primary")"
+                                         role="progressbar"
+                                         style="width: @item.ProgressPercent%; min-width: @progressMinWidth;"
+                                         aria-valuenow="@item.ProgressPercent"
+                                         aria-valuemin="0"
+                                         aria-valuemax="100">
+                                        @item.ProgressPercent%
+                                    </div>
+                                </div>
+                            </td>
+                            <td>@item.EstimatedEndDate.ToString("dd.MM HH:mm")</td>
+                            <td>
+                                <div class="d-flex flex-wrap gap-2">
+                                    @if (item.Status == "Pending")
+                                    {
+                                        <form asp-action="Start" method="post">
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button type="submit" class="btn btn-sm btn-outline-success">Запустить</button>
+                                        </form>
+                                    }
+
+                                    @if (item.Status != "Completed" && item.Status != "Cancelled")
+                                    {
+                                        <form asp-action="UpdateProgress" method="post" class="d-flex gap-2">
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <input type="number" name="progressPercent" min="0" max="100" value="@item.ProgressPercent" class="form-control form-control-sm" style="width: 90px;" />
+                                            <button type="submit" class="btn btn-sm btn-outline-primary">Обновить</button>
+                                        </form>
+
+                                        <form asp-action="Complete" method="post">
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button type="submit" class="btn btn-sm btn-success">Выполнить</button>
+                                        </form>
+
+                                        <form asp-action="Cancel" method="post">
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Отменить</button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted small">Действий нет</span>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

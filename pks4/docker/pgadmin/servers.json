@@ -1,0 +1,13 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "PKS4 PostgreSQL",
+      "Group": "Servers",
+      "Host": "postgres",
+      "Port": 5432,
+      "MaintenanceDB": "postgres",
+      "Username": "postgres",
+      "SSLMode": "prefer"
+    }
+  }
+}

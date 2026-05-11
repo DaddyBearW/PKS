@@ -1,0 +1,32 @@
+@model List<City>
+@{
+    ViewData["Title"] = "Города";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3 mb-1">Список городов</h1>
+        <p class="text-muted mb-0">Простое приложение по практике №4 · Загружено городов: @Model.Count</p>
+    </div>
+    <form method="get" class="d-flex" style="max-width: 360px; width: 100%;">
+        <input type="text" name="search" value="@ViewBag.Search" class="form-control me-2" placeholder="Поиск по названию" />
+        <button type="submit" class="btn btn-primary">Найти</button>
+    </form>
+</div>
+
+<div class="row g-4">
+    @foreach (var city in Model)
+    {
+        <div class="col-md-6">
+            <div class="card city-card h-100 border-0 shadow-sm">
+                <img src="@city.PhotoUrl" class="card-img-top city-photo" alt="@city.Name" />
+                <div class="card-body">
+                    <h2 class="h5 mb-2">@city.Name</h2>
+                    <p class="mb-1"><strong>Регион:</strong> @city.Region</p>
+                    <p class="mb-3"><strong>Население:</strong> @city.Population.ToString("N0")</p>
+                    <a asp-action="Details" asp-route-id="@city.Id" class="btn btn-outline-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

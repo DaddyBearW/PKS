@@ -23,3 +23,423 @@ Host: localhost:8080
 [14.04.2026 12:50:01] SERVER SYSTEM | Код: 200 | Успех
 Сервер остановлен.
 
+[27.04.2026 09:11:29] SERVER SYSTEM | Код: 200 | Успех
+Сервер запущен на порту 8080
+
+[27.04.2026 09:11:33] CLIENT GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Тело запроса:
+<нет тела>
+Ответ:
+{"averageProcessingMs":0,"getRequests":0,"messagesCount":0,"postRequests":0,"totalRequests":0,"uptime":"00:00:03"}
+Время выполнения: 59 мс
+
+[27.04.2026 09:11:33] SERVER GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Заголовки:
+Connection: Keep-Alive
+Host: localhost:8080
+Тело запроса:
+<пусто>
+Ответ:
+{"averageProcessingMs":0,"getRequests":0,"messagesCount":0,"postRequests":0,"totalRequests":0,"uptime":"00:00:03"}
+Время обработки: 42 мс
+
+[27.04.2026 09:11:47] SERVER POST | Код: 200 | Успех
+URL: http://localhost:8080/
+Заголовки:
+Content-Length: 46
+Content-Type: application/json; charset=utf-8
+Expect: 100-continue
+Host: localhost:8080
+Тело запроса:
+{
+  "message": "Привет Никита"
+}
+Ответ:
+{"id":"a91f369081e74d0aa7415480ffa5c216","message":"Сообщение сохранено."}
+Время обработки: 4 мс
+
+[27.04.2026 09:11:47] CLIENT POST | Код: 200 | Успех
+URL: http://localhost:8080/
+Тело запроса:
+{
+  "message": "Привет Никита"
+}
+Ответ:
+{"id":"a91f369081e74d0aa7415480ffa5c216","message":"Сообщение сохранено."}
+Время выполнения: 9 мс
+
+[27.04.2026 09:11:56] SERVER GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Заголовки:
+Host: localhost:8080
+Тело запроса:
+<пусто>
+Ответ:
+{"averageProcessingMs":23.24,"getRequests":1,"messagesCount":1,"postRequests":1,"totalRequests":2,"uptime":"00:00:26"}
+Время обработки: 0 мс
+
+[27.04.2026 09:11:56] CLIENT GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Тело запроса:
+<нет тела>
+Ответ:
+{"averageProcessingMs":23.24,"getRequests":1,"messagesCount":1,"postRequests":1,"totalRequests":2,"uptime":"00:00:26"}
+Время выполнения: 2 мс
+
+[27.04.2026 09:16:58] SERVER POST | Код: 200 | Успех
+URL: http://localhost:8080/
+Заголовки:
+Connection: Keep-Alive
+Content-Length: 26
+Content-Type: application/json; charset=utf-8
+Expect: 100-continue
+Host: localhost:8080
+Тело запроса:
+{
+  "message": "Ало"
+
+Ответ:
+{"id":"5e11081f3cf44b02ad22873d9e93fd4a","message":"Сообщение сохранено."}
+Время обработки: 0 мс
+
+[27.04.2026 09:16:58] CLIENT POST | Код: 200 | Успех
+URL: http://localhost:8080/
+Тело запроса:
+{
+  "message": "Ало"
+
+Ответ:
+{"id":"5e11081f3cf44b02ad22873d9e93fd4a","message":"Сообщение сохранено."}
+Время выполнения: 4 мс
+
+[27.04.2026 09:17:10] SERVER POST | Код: 400 | Ошибка
+URL: http://localhost:8080/
+Заголовки:
+Content-Length: 26
+Content-Type: application/json; charset=utf-8
+Expect: 100-continue
+Host: localhost:8080
+Тело запроса:
+{
+  "messae": "Ало"
+}
+Ответ:
+{"error":"Ожидался JSON вида { \"message\": \"текст\" }."}
+Время обработки: 1 мс
+
+[27.04.2026 09:17:10] CLIENT POST | Код: 400 | Ошибка
+URL: http://localhost:8080/
+Тело запроса:
+{
+  "messae": "Ало"
+}
+Ответ:
+{"error":"Ожидался JSON вида { \"message\": \"текст\" }."}
+Время выполнения: 22 мс
+
+[27.04.2026 09:18:03] CLIENT POST | Код: 200 | Успех
+URL: http://localhost:8080/
+Тело запроса:
+{
+  "message": "Ало"
+}
+Ответ:
+{"id":"e4153e0423bc4a01969d1cd02ee23ebe","message":"Сообщение сохранено."}
+Время выполнения: 3 мс
+
+[27.04.2026 09:18:03] SERVER POST | Код: 200 | Успех
+URL: http://localhost:8080/
+Заголовки:
+Content-Length: 27
+Content-Type: application/json; charset=utf-8
+Expect: 100-continue
+Host: localhost:8080
+Тело запроса:
+{
+  "message": "Ало"
+}
+Ответ:
+{"id":"e4153e0423bc4a01969d1cd02ee23ebe","message":"Сообщение сохранено."}
+Время обработки: 0 мс
+
+[27.04.2026 09:20:05] CLIENT POST | Код: 0 | Ошибка
+URL: http://localhost:8000/
+Ошибка клиента: Произошла ошибка при отправке запроса.
+
+[27.04.2026 09:22:43] SERVER POST | Код: 200 | Успех
+URL: http://localhost:8080/
+Заголовки:
+Connection: Keep-Alive
+Content-Length: 42
+Content-Type: application/json; charset=utf-8
+Expect: 100-continue
+Host: localhost:8080
+Тело запроса:
+{
+  "message": "привет Даня"
+}
+Ответ:
+{"id":"758df659b7854e5fad714453866e8bc3","message":"Сообщение сохранено."}
+Время обработки: 0 мс
+
+[27.04.2026 09:22:43] CLIENT POST | Код: 200 | Успех
+URL: http://localhost:8080/
+Тело запроса:
+{
+  "message": "привет Даня"
+}
+Ответ:
+{"id":"758df659b7854e5fad714453866e8bc3","message":"Сообщение сохранено."}
+Время выполнения: 10 мс
+
+[27.04.2026 09:22:54] SERVER POST | Код: 400 | Ошибка
+URL: http://localhost:8080/
+Заголовки:
+Content-Length: 41
+Content-Type: application/json; charset=utf-8
+Expect: 100-continue
+Host: localhost:8080
+Тело запроса:
+{
+  "messae": "привет Даня"
+}
+Ответ:
+{"error":"Ожидался JSON вида { \"message\": \"текст\" }."}
+Время обработки: 0 мс
+
+[27.04.2026 09:22:54] CLIENT POST | Код: 400 | Ошибка
+URL: http://localhost:8080/
+Тело запроса:
+{
+  "messae": "привет Даня"
+}
+Ответ:
+{"error":"Ожидался JSON вида { \"message\": \"текст\" }."}
+Время выполнения: 4 мс
+
+[27.04.2026 09:23:03] SERVER GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Заголовки:
+Host: localhost:8080
+Тело запроса:
+<пусто>
+Ответ:
+{"averageProcessingMs":6.37,"getRequests":2,"messagesCount":4,"postRequests":6,"totalRequests":8,"uptime":"00:11:33"}
+Время обработки: 0 мс
+
+[27.04.2026 09:23:03] CLIENT GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Тело запроса:
+<нет тела>
+Ответ:
+{"averageProcessingMs":6.37,"getRequests":2,"messagesCount":4,"postRequests":6,"totalRequests":8,"uptime":"00:11:33"}
+Время выполнения: 1 мс
+
+[27.04.2026 09:23:47] SERVER GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Заголовки:
+Host: localhost:8080
+Тело запроса:
+<пусто>
+Ответ:
+{"averageProcessingMs":5.68,"getRequests":3,"messagesCount":4,"postRequests":6,"totalRequests":9,"uptime":"00:12:18"}
+Время обработки: 0 мс
+
+[27.04.2026 09:23:47] CLIENT GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Тело запроса:
+<нет тела>
+Ответ:
+{"averageProcessingMs":5.68,"getRequests":3,"messagesCount":4,"postRequests":6,"totalRequests":9,"uptime":"00:12:18"}
+Время выполнения: 4 мс
+
+[27.04.2026 09:23:47] SERVER GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Заголовки:
+Host: localhost:8080
+Тело запроса:
+<пусто>
+Ответ:
+{"averageProcessingMs":5.15,"getRequests":4,"messagesCount":4,"postRequests":6,"totalRequests":10,"uptime":"00:12:18"}
+Время обработки: 0 мс
+
+[27.04.2026 09:23:47] CLIENT GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Тело запроса:
+<нет тела>
+Ответ:
+{"averageProcessingMs":5.15,"getRequests":4,"messagesCount":4,"postRequests":6,"totalRequests":10,"uptime":"00:12:18"}
+Время выполнения: 3 мс
+
+[27.04.2026 09:23:48] SERVER GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Заголовки:
+Host: localhost:8080
+Тело запроса:
+<пусто>
+Ответ:
+{"averageProcessingMs":4.7,"getRequests":5,"messagesCount":4,"postRequests":6,"totalRequests":11,"uptime":"00:12:18"}
+Время обработки: 0 мс
+
+[27.04.2026 09:23:48] CLIENT GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Тело запроса:
+<нет тела>
+Ответ:
+{"averageProcessingMs":4.7,"getRequests":5,"messagesCount":4,"postRequests":6,"totalRequests":11,"uptime":"00:12:18"}
+Время выполнения: 2 мс
+
+[27.04.2026 09:23:48] CLIENT GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Тело запроса:
+<нет тела>
+Ответ:
+{"averageProcessingMs":4.32,"getRequests":6,"messagesCount":4,"postRequests":6,"totalRequests":12,"uptime":"00:12:18"}
+Время выполнения: 6 мс
+
+[27.04.2026 09:23:48] SERVER GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Заголовки:
+Host: localhost:8080
+Тело запроса:
+<пусто>
+Ответ:
+{"averageProcessingMs":4.32,"getRequests":6,"messagesCount":4,"postRequests":6,"totalRequests":12,"uptime":"00:12:18"}
+Время обработки: 0 мс
+
+[27.04.2026 09:23:48] SERVER GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Заголовки:
+Host: localhost:8080
+Тело запроса:
+<пусто>
+Ответ:
+{"averageProcessingMs":4,"getRequests":7,"messagesCount":4,"postRequests":6,"totalRequests":13,"uptime":"00:12:18"}
+Время обработки: 0 мс
+
+[27.04.2026 09:23:48] CLIENT GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Тело запроса:
+<нет тела>
+Ответ:
+{"averageProcessingMs":4,"getRequests":7,"messagesCount":4,"postRequests":6,"totalRequests":13,"uptime":"00:12:18"}
+Время выполнения: 2 мс
+
+[27.04.2026 09:23:48] CLIENT GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Тело запроса:
+<нет тела>
+Ответ:
+{"averageProcessingMs":3.72,"getRequests":8,"messagesCount":4,"postRequests":6,"totalRequests":14,"uptime":"00:12:18"}
+Время выполнения: 2 мс
+
+[27.04.2026 09:23:48] SERVER GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Заголовки:
+Host: localhost:8080
+Тело запроса:
+<пусто>
+Ответ:
+{"averageProcessingMs":3.72,"getRequests":8,"messagesCount":4,"postRequests":6,"totalRequests":14,"uptime":"00:12:18"}
+Время обработки: 0 мс
+
+[27.04.2026 09:23:48] SERVER GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Заголовки:
+Host: localhost:8080
+Тело запроса:
+<пусто>
+Ответ:
+{"averageProcessingMs":3.48,"getRequests":9,"messagesCount":4,"postRequests":6,"totalRequests":15,"uptime":"00:12:19"}
+Время обработки: 0 мс
+
+[27.04.2026 09:23:48] CLIENT GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Тело запроса:
+<нет тела>
+Ответ:
+{"averageProcessingMs":3.48,"getRequests":9,"messagesCount":4,"postRequests":6,"totalRequests":15,"uptime":"00:12:19"}
+Время выполнения: 2 мс
+
+[27.04.2026 09:23:48] CLIENT GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Тело запроса:
+<нет тела>
+Ответ:
+{"averageProcessingMs":3.27,"getRequests":10,"messagesCount":4,"postRequests":6,"totalRequests":16,"uptime":"00:12:19"}
+Время выполнения: 2 мс
+
+[27.04.2026 09:23:48] SERVER GET | Код: 200 | Успех
+URL: http://localhost:8080/
+Заголовки:
+Host: localhost:8080
+Тело запроса:
+<пусто>
+Ответ:
+{"averageProcessingMs":3.27,"getRequests":10,"messagesCount":4,"postRequests":6,"totalRequests":16,"uptime":"00:12:19"}
+Время обработки: 0 мс
+
+[27.04.2026 09:24:43] CLIENT GET | Код: 403 | Ошибка
+URL: https://practicum.yandex.ru/backend-developer/?utm_source=yandex&utm_medium=cpc&utm_campaign=Yan_Sch_RF_Prog_backDe_b2c_Kursy_Regular_exp-AA_460&utm_content=sty_search:s_none:cid_118938225:gid_5556089910:kw_пайтон%20программирование:pid_54525682302:aid_1887292742502401888:crid_0:rid_54525682302:p_1:pty_premium:mty_syn:mkw_:dty_desktop:cgcid_0:rn_Москва:rid_213&utm_term=пайтон%20программирование&etext=2202.VhpjlEtfAAlJfVsZsTmjOI9zNU6N8JMnLI51tyIm9wiRZW8bzrEpm0k1K5w2gXsQ3XI6YUuRlUoraWE5p6T9N4O2mCAe56d7ZMeOVPequCV5emNya3l5bm1lYXVmZHF4.4ce5b95e4c1fb3a9b3a87f3dfb8709989a4c27bd&yclid=10153040060737126399#ImageText_whatDoing
+Тело запроса:
+<нет тела>
+Ответ:
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>403</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    <link rel="stylesheet" href="https://cdnrhkgfkkpupuotntfj.svc.cdn.yandex.net/style1.css">
+</head>
+
+<body>
+    
+    <div class='header'>
+        <a target="_blank" class="header__logo" style="background-image: url('https://cdnrhkgfkkpupuotntfj.svc.cdn.yandex.net/yandexrulogo.svg');" href="https://www.ya.ru">Yandex</a>
+        <div class='header__code'>403</div>
+    </div>
+    <div class='content'>
+        <pre></pre>
+        
+            
+                
+    <h1 class="content__h1">Доступ к&nbsp;сервису временно запрещён</h1>
+    <h2 class="content__h2">Почему это произошло?</h2>
+    <p>
+        С&nbsp;вашего IP-адреса одновременно поступает очень много запросов.
+        <br>Такое поведение показалось подозрительным, поэтому мы временно закрыли доступ к&nbsp;сайту.<br>Возможно, на&nbsp;вашем устройстве есть программы, которые отправляют запросы без вашего ведома.
+    </p>
+    <h2 class="content__h2">Что мне делать?</h2>
+    <p>
+        Напишите в&nbsp;службу поддержки через <a target="_blank" class="link" href="https://yandex.ru/support/smart-captcha/about-403.html?form-unique_key=8590179471171797096&form-fb-hint=2.78" onclick="ym(15897442, 'reachGoal', 'support_complain', { 'req_id': '' }); return true;">форму обратной связи</a>.
+        <br>Подробно опишите ситуацию — поможем разобраться, что случилось, и подскажем, как действовать дальше.
+    </p>
+    <p>8590179471171797096</p>
+
+            
+            <script src="/captcha_smart_qrcode.min.js"></script>
+            <div id="smart-captcha-qrcode"></div>
+            <script type="text/javascript">
+                new QRCode(document.getElementById("smart-captcha-qrcode"), "https://yandex.ru/support/smart-captcha?form-unique_key=8590179471171797096&form-fb-hint=2.78");
+            </script>
+        
+    </div>
+    <div class='footer'><span class='footer__copyright'>©&nbsp;Yandex</span></div>
+    <!-- Yandex.Metrika counter -->
+    <script
+        type="text/javascript">(function (m, e, t, r, i, k, a) { m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) }; m[i].l = 1 * new Date(); k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a) })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym"); ym(15897442, "init", { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true, ut: "noindex", params: { "req_id": "", "unique_key": "8590179471171797096", "http_code": "403" } });</script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/15897442?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div>
+    </noscript><!-- /Yandex.Metrika counter -->
+</body>
+
+</html>
+Время выполнения: 159 мс
+
+[27.04.2026 09:25:33] SERVER SYSTEM | Код: 200 | Успех
+Сервер остановлен.
+

@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "Gt0fi30KoL3RoCgvaVYkmvYmHTS/5WexF6FXd1Z7u0g=",
+  "Source": "PKS4.Pr4",
+  "BasePath": "_content/PKS4.Pr4",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "PKS4.Pr4\\wwwroot",
+      "Source": "PKS4.Pr4",
+      "ContentRoot": "C:\\Users\\Mosen\\Desktop\\PKS\\pks4\\pr4\\wwwroot\\",
+      "BasePath": "_content/PKS4.Pr4",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}

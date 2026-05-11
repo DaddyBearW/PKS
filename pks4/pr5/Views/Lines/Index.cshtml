@@ -1,0 +1,59 @@
+@model List<ProductionLine>
+@{
+    ViewData["Title"] = "Линии";
+}
+
+<h1 class="h4 mb-4">Производственные линии</h1>
+
+<div class="row g-4">
+@foreach (var line in Model)
+{
+    var lineClass = line.Status == "Active" ? "status-badge status-active" : "status-badge status-stopped";
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="h5 mb-0">@line.Name</h2>
+                    <span class="@lineClass">@line.Status</span>
+                </div>
+                <p><strong>Коэффициент эффективности:</strong> @line.EfficiencyFactor</p>
+                <p><strong>Текущий заказ:</strong> @(line.CurrentWorkOrderId?.ToString() ?? "Нет")</p>
+
+                <form asp-action="Update" method="post" class="row g-2 mb-4">
+                    <input type="hidden" name="id" value="@line.Id" />
+                    <div class="col-md-5">
+                        <select name="status" class="form-select">
+                            @if (line.Status == "Active")
+                            {
+                                <option value="Active" selected>Active</option>
+                                <option value="Stopped">Stopped</option>
+                            }
+                            else
+                            {
+                                <option value="Active">Active</option>
+                                <option value="Stopped" selected>Stopped</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <input name="efficiencyFactor" type="number" step="0.1" min="0.5" max="2" value="@line.EfficiencyFactor" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary w-100">Сохранить</button>
+                    </div>
+                </form>
+
+                <h3 class="h6">Расписание</h3>
+                <ul class="list-group">
+                    @foreach (var order in line.WorkOrders.OrderBy(item => item.StartDate))
+                    {
+                        <li class="list-group-item">
+                            Заказ №@order.Id - @order.Product?.Name - @order.StartDate.ToString("dd.MM HH:mm")
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+</div>

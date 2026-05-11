@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Mosen\\Desktop\\PKS\\pks4\\pr4\\wwwroot\\images\\coats\\kazan.svg",
+      "PackagePath": "staticwebassets\\images\\coats\\kazan.svg"
+    },
+    {
+      "Id": "C:\\Users\\Mosen\\Desktop\\PKS\\pks4\\pr4\\wwwroot\\images\\coats\\moscow.svg",
+      "PackagePath": "staticwebassets\\images\\coats\\moscow.svg"
+    },
+    {
+      "Id": "C:\\Users\\Mosen\\Desktop\\PKS\\pks4\\pr4\\wwwroot\\images\\coats\\nizhny-novgorod.svg",
+      "PackagePath": "staticwebassets\\images\\coats\\nizhny-novgorod.svg"
+    },
+    {
+      "Id": "C:\\Users\\Mosen\\Desktop\\PKS\\pks4\\pr4\\wwwroot\\images\\coats\\saint-petersburg.svg",
+      "PackagePath": "staticwebassets\\images\\coats\\saint-petersburg.svg"
+    },
+    {
+      "Id": "C:\\Users\\Mosen\\Desktop\\PKS\\pks4\\pr4\\wwwroot\\images\\coats\\sochi.svg",
+      "PackagePath": "staticwebassets\\images\\coats\\sochi.svg"
+    },
+    {
+      "Id": "C:\\Users\\Mosen\\Desktop\\PKS\\pks4\\pr4\\wwwroot\\images\\coats\\yekaterinburg.svg",
+      "PackagePath": "staticwebassets\\images\\coats\\yekaterinburg.svg"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.PKS4.Pr4.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.PKS4.Pr4.props",
+      "PackagePath": "build\\PKS4.Pr4.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.PKS4.Pr4.props",
+      "PackagePath": "buildMultiTargeting\\PKS4.Pr4.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.PKS4.Pr4.props",
+      "PackagePath": "buildTransitive\\PKS4.Pr4.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

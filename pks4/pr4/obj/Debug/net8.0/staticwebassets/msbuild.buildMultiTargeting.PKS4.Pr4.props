@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\PKS4.Pr4.props" />
+</Project>

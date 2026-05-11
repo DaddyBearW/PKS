@@ -1,0 +1,67 @@
+@model HomeDashboardViewModel
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<h1 class="h3 mb-4">Интерактивная система управления производством</h1>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h2 class="h6 text-muted">Продукты</h2>
+                <div class="display-6">@Model.ProductCount</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h2 class="h6 text-muted">Материалы</h2>
+                <div class="display-6">@Model.MaterialCount</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h2 class="h6 text-muted">Активные заказы</h2>
+                <div class="display-6">@Model.ActiveOrdersCount</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h2 class="h6 text-muted">Низкий запас</h2>
+                <div class="display-6">@Model.LowStockCount</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2 class="h5 mb-3">Последние заказы</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Номер</th>
+            <th>Продукт</th>
+            <th>Линия</th>
+            <th>Статус</th>
+            <th>Срок</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var order in Model.LatestOrders)
+    {
+        <tr>
+            <td>@order.Id</td>
+            <td>@order.Product?.Name</td>
+            <td>@(order.ProductionLine?.Name ?? "Не назначена")</td>
+            <td>@order.Status</td>
+            <td>@order.EstimatedEndDate.ToString("dd.MM.yyyy HH:mm")</td>
+        </tr>
+    }
+    </tbody>
+</table>

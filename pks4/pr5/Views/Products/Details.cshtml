@@ -1,0 +1,67 @@
+@model ProductDetailsViewModel
+@{
+    ViewData["Title"] = Model.Product.Name;
+}
+
+<a asp-action="Index" class="btn btn-outline-secondary mb-4">Назад</a>
+
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h1 class="h4">@Model.Product.Name</h1>
+                <p><strong>Категория:</strong> @Model.Product.Category</p>
+                <p><strong>Описание:</strong> @Model.Product.Description</p>
+                <p><strong>Характеристики:</strong> @Model.Product.Specifications</p>
+                <p><strong>Время на 1 шт.:</strong> @Model.Product.ProductionTimePerUnit мин</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <h2 class="h5 mb-3">Материалы продукта</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Материал</th>
+                            <th>Нужно на 1 шт.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.Product.ProductMaterials)
+                    {
+                        <tr>
+                            <td>@item.Material?.Name</td>
+                            <td>@item.QuantityNeeded @item.Material?.UnitOfMeasure</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h2 class="h5 mb-3">Добавить материал</h2>
+                <form asp-action="AddMaterial" method="post">
+                    <input type="hidden" name="productId" value="@Model.Product.Id" />
+                    <div class="mb-3">
+                        <label class="form-label">Материал</label>
+                        <select name="materialId" class="form-select">
+                            @foreach (var material in Model.AvailableMaterials)
+                            {
+                                <option value="@material.Id">@material.Name (@material.UnitOfMeasure)</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Количество на 1 продукт</label>
+                        <input name="quantityNeeded" type="number" step="0.01" class="form-control" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

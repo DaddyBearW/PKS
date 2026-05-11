@@ -1,0 +1,38 @@
+@model City
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<a asp-action="Index" class="btn btn-outline-secondary mb-4">Назад к списку</a>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <img src="@Model.PhotoUrl" class="img-fluid rounded shadow-sm" alt="@Model.Name" />
+    </div>
+    <div class="col-lg-5">
+        <h1 class="h2">@Model.Name</h1>
+        <p><strong>Регион:</strong> @Model.Region</p>
+        <p><strong>Население:</strong> @Model.Population.ToString("N0")</p>
+        <p>@Model.History</p>
+    </div>
+</div>
+
+<hr class="my-4" />
+
+<h2 class="h4 mb-3">Достопримечательности (@Model.Attractions.Count)</h2>
+
+<div class="row g-4">
+    @foreach (var attraction in Model.Attractions)
+    {
+        <div class="col-md-6">
+            <div class="card h-100 border-0 shadow-sm">
+                <img src="@attraction.PhotoUrl" class="card-img-top attraction-photo" style="height: 220px;" alt="@attraction.Name" />
+                <div class="card-body">
+                    <h3 class="h5">@attraction.Name</h3>
+                    <p class="text-muted">@attraction.Description</p>
+                    <a asp-controller="Attractions" asp-action="Details" asp-route-id="@attraction.Id" class="btn btn-sm btn-primary">Открыть</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

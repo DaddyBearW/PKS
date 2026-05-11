@@ -1,0 +1,20 @@
+@model Attraction
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<a asp-controller="Cities" asp-action="Details" asp-route-id="@Model.CityId" class="btn btn-outline-secondary mb-4">Назад к городу</a>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <img src="@Model.PhotoUrl" class="img-fluid rounded shadow-sm" alt="@Model.Name" />
+    </div>
+    <div class="col-lg-5">
+        <h1 class="h2">@Model.Name</h1>
+        <p><strong>Город:</strong> @Model.City?.Name</p>
+        <p><strong>Часы работы:</strong> @Model.WorkingHours</p>
+        <p><strong>Стоимость:</strong> @(Model.VisitPrice == 0 ? "Бесплатно" : $"{Model.VisitPrice} руб.")</p>
+        <p class="mb-2"><strong>Кратко:</strong> @Model.Description</p>
+        <p><strong>История:</strong> @Model.History</p>
+    </div>
+</div>
