@@ -1,0 +1,57 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Mosen\\Desktop\\PKS\\pks5\\PKS5.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "C:\\Users\\Mosen\\Desktop\\PKS\\pks5\\PKS5.Client\\obj\\Debug\\net8.0\\compressed\\scq5hmerr9.gz",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "C:\\Users\\Mosen\\Desktop\\PKS\\pks5\\PKS5.Client\\obj\\Debug\\net8.0\\scopedcss\\bundle\\PKS5.Client.styles.css",
+      "PackagePath": "staticwebassets\\PKS5.Client.styles.css"
+    },
+    {
+      "Id": "C:\\Users\\Mosen\\Desktop\\PKS\\pks5\\PKS5.Client\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\Mosen\\Desktop\\PKS\\pks5\\PKS5.Client\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Mosen\\Desktop\\PKS\\pks5\\PKS5.Client\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Mosen\\Desktop\\PKS\\pks5\\PKS5.Client\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\Mosen\\Desktop\\PKS\\pks5\\PKS5.Client\\wwwroot\\icon-192.png",
+      "PackagePath": "staticwebassets\\icon-192.png"
+    },
+    {
+      "Id": "C:\\Users\\Mosen\\Desktop\\PKS\\pks5\\PKS5.Client\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.PKS5.Client.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.PKS5.Client.props",
+      "PackagePath": "build\\PKS5.Client.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.PKS5.Client.props",
+      "PackagePath": "buildMultiTargeting\\PKS5.Client.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.PKS5.Client.props",
+      "PackagePath": "buildTransitive\\PKS5.Client.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

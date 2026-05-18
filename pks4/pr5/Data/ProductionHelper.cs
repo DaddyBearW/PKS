@@ -18,7 +18,9 @@ public static class ProductionHelper
 
     public static DateTime CalculateEndDate(Product product, int quantity, float efficiencyFactor, DateTime startDate)
     {
-        return startDate.AddMinutes(CalculateMinutes(product, quantity, efficiencyFactor));
+        var normalizedStartDate = DateTime.SpecifyKind(startDate, DateTimeKind.Unspecified);
+        var endDate = normalizedStartDate.AddMinutes(CalculateMinutes(product, quantity, efficiencyFactor));
+        return DateTime.SpecifyKind(endDate, DateTimeKind.Unspecified);
     }
 
     public static async Task<string?> CheckMaterialsAsync(ProductionContext context, int productId, int quantity)

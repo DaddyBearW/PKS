@@ -1,0 +1,27 @@
+@inherits LayoutComponentBase
+
+<div class="page @(isDarkTheme ? "theme-dark" : "theme-light")">
+    <header class="top-panel">
+        <div>
+            <p class="project-name">PKS5</p>
+            <h1>Управление товарами интернет-магазина</h1>
+        </div>
+
+        <button class="theme-button" @onclick="ToggleTheme">
+            @(isDarkTheme ? "Светлая тема" : "Темная тема")
+        </button>
+    </header>
+
+    <main class="content">
+        @Body
+    </main>
+</div>
+
+@code {
+    private bool isDarkTheme;
+
+    private void ToggleTheme()
+    {
+        isDarkTheme = !isDarkTheme;
+    }
+}

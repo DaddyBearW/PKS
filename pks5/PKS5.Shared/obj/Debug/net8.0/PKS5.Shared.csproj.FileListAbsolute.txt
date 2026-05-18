@@ -1,0 +1,12 @@
+C:\Users\Mosen\Desktop\PKS\pks5\PKS5.Shared\bin\Debug\net8.0\PKS5.Shared.deps.json
+C:\Users\Mosen\Desktop\PKS\pks5\PKS5.Shared\bin\Debug\net8.0\PKS5.Shared.dll
+C:\Users\Mosen\Desktop\PKS\pks5\PKS5.Shared\bin\Debug\net8.0\PKS5.Shared.pdb
+C:\Users\Mosen\Desktop\PKS\pks5\PKS5.Shared\obj\Debug\net8.0\PKS5.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mosen\Desktop\PKS\pks5\PKS5.Shared\obj\Debug\net8.0\PKS5.Shared.AssemblyInfoInputs.cache
+C:\Users\Mosen\Desktop\PKS\pks5\PKS5.Shared\obj\Debug\net8.0\PKS5.Shared.AssemblyInfo.cs
+C:\Users\Mosen\Desktop\PKS\pks5\PKS5.Shared\obj\Debug\net8.0\PKS5.Shared.csproj.CoreCompileInputs.cache
+C:\Users\Mosen\Desktop\PKS\pks5\PKS5.Shared\obj\Debug\net8.0\PKS5.Shared.sourcelink.json
+C:\Users\Mosen\Desktop\PKS\pks5\PKS5.Shared\obj\Debug\net8.0\PKS5.Shared.dll
+C:\Users\Mosen\Desktop\PKS\pks5\PKS5.Shared\obj\Debug\net8.0\refint\PKS5.Shared.dll
+C:\Users\Mosen\Desktop\PKS\pks5\PKS5.Shared\obj\Debug\net8.0\PKS5.Shared.pdb
+C:\Users\Mosen\Desktop\PKS\pks5\PKS5.Shared\obj\Debug\net8.0\ref\PKS5.Shared.dll

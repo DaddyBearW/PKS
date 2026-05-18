@@ -1,0 +1,152 @@
+:root {
+    --background-color: #f3f5f8;
+    --panel-color: #ffffff;
+    --text-color: #1c2430;
+    --muted-color: #6a7688;
+    --border-color: #d8dee8;
+    --accent-color: #2f6fed;
+    --danger-color: #c94b4b;
+}
+
+.theme-dark {
+    --background-color: #16202b;
+    --panel-color: #1f2b38;
+    --text-color: #edf3ff;
+    --muted-color: #b1bfd1;
+    --border-color: #314050;
+    --accent-color: #5b8cff;
+    --danger-color: #ef6d6d;
+}
+
+html, body {
+    margin: 0;
+    font-family: Segoe UI, Tahoma, sans-serif;
+}
+
+body {
+    background: var(--background-color);
+    color: var(--text-color);
+}
+
+h1:focus {
+    outline: none;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.card {
+    background: var(--panel-color);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.edit-card {
+    margin-top: 20px;
+    max-width: 500px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.form-control {
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 1rem;
+    background: var(--panel-color);
+    color: var(--text-color);
+}
+
+.primary-button,
+.secondary-button,
+.danger-button {
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.primary-button {
+    background: var(--accent-color);
+    color: #fff;
+}
+
+.secondary-button {
+    background: #e5ebf5;
+    color: #243246;
+}
+
+.danger-button {
+    background: var(--danger-color);
+    color: #fff;
+}
+
+.theme-dark .secondary-button {
+    background: #314050;
+    color: #edf3ff;
+}
+
+.products-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.products-table th,
+.products-table td {
+    border-bottom: 1px solid var(--border-color);
+    padding: 12px 10px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.actions,
+.action-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.status-message {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.validation-message {
+    color: #d64545;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
